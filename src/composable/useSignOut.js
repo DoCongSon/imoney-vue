@@ -1,6 +1,6 @@
-import { auth } from '@/configs/firebase';
-import { signOut } from 'firebase/auth';
-import { ref, reactive } from 'vue';
+import { auth } from "../configs/firebase";
+import { signOut } from "firebase/auth";
+import { ref, reactive } from "vue";
 
 const error = reactive({ code: null, message: null });
 const isPending = ref(false);
@@ -19,8 +19,8 @@ const logout = async () => {
   }
 };
 
-const useSignout = () => {
+const useSignOut = () => {
   return { error, isPending, logout };
 };
 
-export { useSignout };
+export { useSignOut };

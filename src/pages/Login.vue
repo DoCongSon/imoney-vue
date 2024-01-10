@@ -2,7 +2,9 @@
   <div class="max-w-lg w-full mx-auto p-2">
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
       <div>
-        <label class="block text-dank text-xl font-bold min-w-20" for="email">Email</label>
+        <label class="block text-dank text-xl font-bold min-w-20" for="email"
+          >Email</label
+        >
         <input
           class="p-4 border-2 mt-2 w-full text-dank border-dank rounded-lg text-xl font-medium bg-second"
           type="email"
@@ -12,7 +14,9 @@
         />
       </div>
       <div class="relative">
-        <label class="block text-dank text-xl font-bold min-w-20" for="password">Password</label>
+        <label class="block text-dank text-xl font-bold min-w-20" for="password"
+          >Password</label
+        >
         <input
           class="pl-4 pr-14 py-4 border-2 mt-2 w-full text-dank border-dank rounded-lg text-xl font-medium bg-second"
           :type="isShowPassword ? 'text' : 'password'"
@@ -34,10 +38,10 @@
 
       <p class="text-lg xl:text-xl text-right">
         <router-link
-          :to="{ name: 'ForgotPassword', params: { email: email } }"
+          :to="{ name: 'ForgotPassword' }"
           class="text-sky-600 hover:underline"
-          >Forgot Password?</router-link
-        >
+          >Forgot Password?
+        </router-link>
       </p>
       <button
         v-if="isPending"
@@ -77,45 +81,56 @@
     </div>
     <p class="text-lg mt-6 xl:text-xl">
       Don’t have an account yet?
-      <router-link class="text-sky-600 ml-2 hover:underline" :to="{ name: 'Register', params: {} }"
-        >Sign up</router-link
-      >
+      <router-link
+        class="text-sky-600 ml-2 hover:underline"
+        :to="{ name: 'Register', params: {} }"
+        >Sign up
+      </router-link>
     </p>
   </div>
 </template>
 
 <script setup>
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/20/solid';
-import { useLogin } from '../composable/useLogin';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
+import { useLogin } from "../composable/useLogin";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
 const isShowPassword = ref(false);
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 
 const router = useRouter();
 
-const { loginWithEmailAndPassword, loginWithGoogle, loginWithGithub, isPending, error } =
-  useLogin();
+const {
+  loginWithEmailAndPassword,
+  loginWithGoogle,
+  loginWithGithub,
+  isPending,
+  error,
+} = useLogin();
 
 const handleSubmit = async () => {
-  await loginWithEmailAndPassword({ email: email.value, password: password.value });
+  await loginWithEmailAndPassword({
+    email: email.value,
+    password: password.value,
+  });
   if (!error.code) {
-    await router.push({name: 'VerifyEmail'});
+    await router.push({ name: "VerifyEmail" });
   }
 };
 
 const handleLoginWithGoogle = async () => {
   await loginWithGoogle();
   if (!error.code) {
-    await router.push({name: 'VerifyEmail'});
+    await router.push({ name: "VerifyEmail" });
   }
 };
 
 const handleLoginWithGithub = async () => {
   await loginWithGithub();
   if (!error.code) {
-    await router.push({name: 'VerifyEmail'});
+    await router.push({ name: "VerifyEmail" });
   }
 };
 </script>
