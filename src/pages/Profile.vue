@@ -18,6 +18,7 @@ const { user, reloadUser } = useUser();
       <img
         src="https://inkythuatso.com/uploads/thumbnails/800/2023/02/hinh-anh-rong-chibi-cute-2-23-15-42-34.jpg"
         class="w-full h-auto object-cover"
+        alt="avatar"
       />
     </div>
     <div class="text-center mt-4" v-if="user">
