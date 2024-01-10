@@ -7,7 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./configs/firebase.js";
 
 let app;
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, () => {
   if (!app) {
     app = createApp(App);
     app.use(router);
